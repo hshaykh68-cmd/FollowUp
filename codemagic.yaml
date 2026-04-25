@@ -1,0 +1,16 @@
+workflows:
+  debug-build:
+    name: Debug Build
+    max_build_duration: 30
+    environment:
+      android:
+        gradle: wrapper
+    cache:
+      cache_paths: []  # No cache - clean build every time
+    scripts:
+      - name: Make gradlew executable
+        script: chmod +x gradlew
+      - name: Clean and build debug APK
+        script: ./gradlew clean assembleDebug --no-daemon --stacktrace
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
